@@ -1,12 +1,6 @@
-import Movie from '../Movie/Movie.js';
+import Movie from '../Movie/Movie';
+import {useState,useEffect} from 'react';
 import axios from 'axios';
-import {useEffect, useState} from 'react'
-
-// const harryPotterFirst = {
-//   title: "Harry Potter and the Sorcers stone",
-//   image: "https://m.media-amazon.com/images/I/51HSkTKlauL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
-//   rating: 5
-// };
 
 // const sherlockHolmes = {
 //   title: "Sherlock Holmes - the pink case",
@@ -27,33 +21,31 @@ import {useEffect, useState} from 'react'
 // };
 
 // const movies = [
-//   harryPotterFirst,
 //   sherlockHolmes,
 //   ironman,
 //   spiderman
 // ];
-
-
-
 const showMovies = (movie) => {
-  return(<div>
-    <Movie movie={movie}/>
-  </div>);
-}
-
-const MovieList = ()=>{
-  const [movies,setMovies] = useState([]);
-  useEffect( ()=>{
-    const fetchData = async () => {
-    const req = await axios.get(`http://localhost:9000/movies`);
-    setMovies(req.data)};
-    fetchData();
-  }, [])
-  return (
+  return(
     <div>
-    {movies.map(showMovies)}
+      <Movie movie={movie} />
     </div>
-  );
-}; 
+  )
+}
+const MoviesList = () => {
+  const [movies,setMovies] = useState([]);
 
-export default MovieList;
+  useEffect(() => {
+    const fetchData = async () => { 
+      const res = await axios.get('http://localhost:9000/movies');
+    setMovies(res.data);
+    }
+    fetchData(); 
+  }, []);
+      return ( <div>
+    {movies.map(showMovies)}
+    </div >
+    )
+    
+}
+export default MoviesList;
