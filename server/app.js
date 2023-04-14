@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors') ;
 const db = require('./db/db')
-db.connectDB();
+db.connectDB(); 
 var moviesRouter = require('./routes/movies')
 
 
